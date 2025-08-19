@@ -22,7 +22,7 @@
         devShells = {
           # Used in CI
           default = pkgs.mkShell {
-            name = "schemas-env";
+            name = "sar-lambda-janitor-env";
             packages = ciDeps;
           };
 
