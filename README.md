@@ -48,3 +48,6 @@ Transform: AWS::Serverless-2016-10-31
 ```
 
 For more details, read this [post](https://theburningmonk.com/2019/05/how-to-include-serverless-repository-apps-in-serverless-yml/).
+
+## Why have we forked this repo?
+Because we are packaging and publishing it as a private application instead of using their publicly available one. We deploy an instance of this lambda to each service.
