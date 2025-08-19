@@ -26,14 +26,6 @@
             packages = ciDeps;
           };
 
-          # recommended .envrc: use flake .#development
-          development = pkgs.mkShell {
-            packages =
-              ciDeps
-              ++ (with pkgs; [
-
-              ]);
-          };
         };
       }
     );
