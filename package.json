@@ -18,19 +18,19 @@
     "aws-sdk": "^2.1692.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "coveralls": "^3.1.1",
-    "eslint": "^8.0.1",
-    "eslint-config-prettier": "^10.1.5",
+    "eslint": "^9.37.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-promise": "^7.2.1",
     "eslint-plugin-standard": "^5.0.0",
     "husky": "^9.1.7",
-    "jest": "^30.0.3",
-    "lint-staged": "^16.1.2",
+    "jest": "^30.2.0",
+    "lint-staged": "^16.2.4",
     "lodash": "^4.17.21"
   },
   "greenkeeper": {
