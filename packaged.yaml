@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: lambda-janitor
+    Description: Cron job for deleting old, unused versions of Lambda functions to
+      clean up storage space
+    Author: Lumigo
+    SpdxLicenseId: MIT
+    LicenseUrl: s3://test-log-to-loki/ef29b5090140bbc637db5ac6de59d81f
+    ReadmeUrl: s3://test-log-to-loki/10e9b1731462a9164f923238453182b5
+    Labels:
+    - lambda
+    - cron
+    HomePageUrl: https://github.com/lumigo/SAR-Lambda-Janitor
+    SemanticVersion: 1.7.2
+    SourceCodeUrl: https://github.com/lumigo/SAR-Lambda-Janitor
+Resources:
+  Clean:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: functions/clean.handler
+      Runtime: nodejs22.x
+      Timeout: 900
+      Environment:
+        Variables:
+          LOG_LEVEL: INFO
+          VERSIONS_TO_KEEP:
+            Ref: VersionsToKeep
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+      Policies:
+      - Statement:
+          Effect: Allow
+          Action:
+          - lambda:DeleteFunction
+          - lambda:List*
+          Resource: '*'
+      Events:
+        CleanScheduledEvent:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1 hour)
+      CodeUri: s3://test-log-to-loki/60d618f2d4075e686f13f04d77d1b447
+    Metadata:
+      SamResourceId: Clean
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName:
+        Fn::Sub: /aws/lambda/${Clean}
+    Metadata:
+      SamResourceId: LogGroup
+Parameters:
+  VersionsToKeep:
+    Type: Number
+    Description: How many versions to keep, even if they are not aliased.
+    Default: 3
+    MinValue: 0
